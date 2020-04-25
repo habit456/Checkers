@@ -1,4 +1,4 @@
-package com.company;
+package com.joshuakaplan;
 
 /**
  * Helper methods for translating and validating positions

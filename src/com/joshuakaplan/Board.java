@@ -1,4 +1,4 @@
-package com.company;
+package com.joshuakaplan;
 
 import java.util.List;
 

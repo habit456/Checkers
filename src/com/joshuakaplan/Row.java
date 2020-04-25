@@ -1,6 +1,5 @@
-package com.company;
+package com.joshuakaplan;
 
-import java.util.ArrayList;
 import java.util.List;
 
 public class Row {

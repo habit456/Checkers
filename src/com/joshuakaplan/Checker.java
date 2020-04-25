@@ -1,4 +1,4 @@
-package com.company;
+package com.joshuakaplan;
 
 public class Checker {
     private Color color;

@@ -1,6 +1,4 @@
-package com.company;
-
-import java.util.Arrays;
+package com.joshuakaplan;
 
 public class Main {
 
