@@ -27,7 +27,7 @@ public class Square {
         this.position = position;
     }
 
-    public Object getChecker() {
+    public Checker getChecker() {
         return checker;
     }
 

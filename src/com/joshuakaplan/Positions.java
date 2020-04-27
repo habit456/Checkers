@@ -77,4 +77,54 @@ public class Positions {
 
         return null;
     }
+
+    public static int columnToInt(String column) {
+        switch (column) {
+            case "A":
+                return 1;
+            case "B":
+                return 2;
+            case "C":
+                return 3;
+            case "D":
+                return 4;
+            case "E":
+                return 5;
+            case "F":
+                return 6;
+            case "G":
+                return 7;
+            case "H":
+                return 8;
+            default:
+                return -1;
+        }
+    }
+
+    public static String intToColumn(int num) {
+        switch (num) {
+            case 1:
+                return "A";
+            case 2:
+                return "B";
+            case 3:
+                return "C";
+            case 4:
+                return "D";
+            case 5:
+                return "E";
+            case 6:
+                return "F";
+            case 7:
+                return "G";
+            case 8:
+                return "H";
+            default:
+                return null;
+        }
+    }
+
+    public static String toPosition(int column, int row) {
+        return intToColumn(column) + row;
+    }
 }
