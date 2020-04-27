@@ -28,9 +28,9 @@ public class Checker {
     @Override
     public String toString() {
         if (color == Color.RED) {
-            return "R";
+            return ConsoleColors.RED_BOLD + "R" + ConsoleColors.RESET;
         } else {
-            return "B";
+            return ConsoleColors.CYAN_BOLD + "B" + ConsoleColors.RESET;
         }
     }
 }
