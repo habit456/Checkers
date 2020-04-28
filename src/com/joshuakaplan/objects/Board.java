@@ -1,6 +1,7 @@
-package com.joshuakaplan;
+package com.joshuakaplan.objects;
 
-import java.util.ArrayList;
+import com.joshuakaplan.utility.BoardPrinter;
+
 import java.util.List;
 
 public class Board {

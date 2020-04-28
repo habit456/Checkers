@@ -1,4 +1,8 @@
-package com.joshuakaplan;
+package com.joshuakaplan.objects;
+
+import com.joshuakaplan.Color;
+import com.joshuakaplan.objects.Checker;
+import com.joshuakaplan.objects.Position;
 
 public class Square {
     private Color color;

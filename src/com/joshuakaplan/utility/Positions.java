@@ -1,4 +1,6 @@
-package com.joshuakaplan;
+package com.joshuakaplan.utility;
+
+import com.joshuakaplan.objects.Position;
 
 /**
  * Helper methods for translating and validating positions
@@ -126,5 +128,25 @@ public class Positions {
 
     public static String toPosition(int column, int row) {
         return intToColumn(column) + row;
+    }
+
+    public static int[] toArray(String position) {
+        return new int[] {columnToInt(position.substring(0, 1)), Integer.parseInt(position.substring(1, 2))};
+    }
+
+    public static int[] calculateDifference(String from, String to, boolean isAbsolute) {
+        int[] fromArr = toArray(from);
+        int[] toArr = toArray(to);
+
+        int[] difference = new int[2];
+        difference[0] = fromArr[0] - toArr[0];
+        difference[1] = fromArr[1] - toArr[1];
+
+        if (isAbsolute) {
+            difference[0] = Math.abs(difference[0]);
+            difference[1] = Math.abs(difference[1]);
+        }
+
+        return difference;
     }
 }

@@ -1,4 +1,7 @@
-package com.joshuakaplan;
+package com.joshuakaplan.utility;
+
+import com.joshuakaplan.objects.Board;
+import com.joshuakaplan.objects.Square;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -16,8 +19,8 @@ public class BoardPrinter {
     private List<Square> board;
 
     public BoardPrinter(Board board) {
-        this(board.getRowCount(), board.getColumnCount(), 10,
-                4, board.getBoard(), 5, 1);
+        this(board.getRowCount(), board.getColumnCount(), 6,
+                2, board.getBoard(), 5, 1);
     }
 
     private BoardPrinter(int rowCount, int columnCount, int squareWidth, int squareHeight, List<Square> board,

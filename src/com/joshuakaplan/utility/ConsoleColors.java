@@ -1,4 +1,4 @@
-package com.joshuakaplan;
+package com.joshuakaplan.utility;
 
 public class ConsoleColors {
     // Reset

@@ -1,4 +1,7 @@
-package com.joshuakaplan;
+package com.joshuakaplan.objects;
+
+import com.joshuakaplan.Color;
+import com.joshuakaplan.utility.ConsoleColors;
 
 public class Checker {
     private Color color;

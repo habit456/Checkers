@@ -1,13 +1,15 @@
-package com.joshuakaplan;
+package com.joshuakaplan.utility;
 
+import com.joshuakaplan.*;
+import com.joshuakaplan.objects.Board;
+import com.joshuakaplan.objects.Checker;
+import com.joshuakaplan.objects.Position;
+import com.joshuakaplan.objects.Square;
 
 import java.util.ArrayList;
 import java.util.List;
 
-/**
- * Utility class for Board related methods.
- */
-public class Boards {
+public class BoardInitializer {
     private static final int rowCount = 8;
     private static final int columnCount = 8;
 
@@ -88,15 +90,5 @@ public class Boards {
                 }
             }
         }
-    }
-
-    public static Square getSquare(List<Square> board, String position) {
-        for (Square square: board) {
-            if (square.getPosition().getPosition().equals(position)) {
-                return square;
-            }
-        }
-
-        return null;
     }
 }

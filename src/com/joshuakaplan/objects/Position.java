@@ -1,4 +1,6 @@
-package com.joshuakaplan;
+package com.joshuakaplan.objects;
+
+import com.joshuakaplan.utility.Positions;
 
 public class Position {
     String position;
