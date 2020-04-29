@@ -95,20 +95,20 @@ public class MoveCheck {
     }
 
     private boolean checkDoubleMove() {
-        int[] difference = Positions.calculateDifference(from, to, false);
-
         // checks if correct direction for not kinged piece
         if (!squareFrom.getChecker().isKing()) {
+            int[] difference = Positions.calculateDifference(from, to, false);
+
             if (!isCorrectDirection(difference)) {
                 return false;
             }
         }
 
-        return isJumpingOverEnemy(difference);
+        return isJumpingOverEnemy();
     }
 
-    private boolean isJumpingOverEnemy(int[] difference) {
-        Square middleSquare = getMiddleSquare(difference);
+    private boolean isJumpingOverEnemy() {
+        Square middleSquare = Positions.getMiddleSquare(from, to, board);
 
         if (middleSquare.isEmpty()) {
             return false;
@@ -119,17 +119,6 @@ public class MoveCheck {
         }
 
         return true;
-    }
-
-    private Square getMiddleSquare(int[] difference) {
-        difference[0] = difference[0] * -1;
-        difference[1] = difference[1] * -1;
-
-        int[] halfDifference = new int[] {difference[0] / 2, difference[1] / 2};
-        int[] fromArr = Positions.toArray(from);
-        int[] middlePositionArray = Positions.calculateSum(halfDifference, fromArr);
-        String middlePosition = Positions.toPosition(middlePositionArray);
-        return Boards.getSquare(board, middlePosition);
     }
 
     private boolean checkSingleMove() {
@@ -156,6 +145,10 @@ public class MoveCheck {
     }
 
     private Move getMoveType() {
+        return getMoveType(from, to);
+    }
+
+    public Move getMoveType(String from, String to) {
         if (!(Positions.isValid(from) && Positions.isValid(to))) {
             return Move.INVALID;
         }
@@ -164,8 +157,6 @@ public class MoveCheck {
 
         return getMove(difference);
     }
-
-
 
     private Move getMove(int[] difference) {
         if (difference[0] == 1 && difference[1] == 1) {

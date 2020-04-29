@@ -1,8 +1,10 @@
 package com.joshuakaplan.utility;
 
 import com.joshuakaplan.objects.Position;
+import com.joshuakaplan.objects.Square;
 
 import java.util.Arrays;
+import java.util.List;
 
 /**
  * Helper methods for translating and validating positions
@@ -165,5 +167,21 @@ public class Positions {
         result[0] = arr1[0] + arr2[0];
         result[1] = arr1[1] + arr2[1];
         return result;
+    }
+
+    public static Square getMiddleSquare(String from, String to, List<Square> board) {
+        int[] difference = Positions.calculateDifference(from, to, false);
+        return getMiddleSquare(difference, from, board);
+    }
+
+    private static Square getMiddleSquare(int[] difference, String from, List<Square> board) {
+        difference[0] = difference[0] * -1;
+        difference[1] = difference[1] * -1;
+
+        int[] halfDifference = new int[] {difference[0] / 2, difference[1] / 2};
+        int[] fromArr = Positions.toArray(from);
+        int[] middlePositionArray = Positions.calculateSum(halfDifference, fromArr);
+        String middlePosition = Positions.toPosition(middlePositionArray);
+        return Boards.getSquare(board, middlePosition);
     }
 }

@@ -1,7 +1,6 @@
 package com.joshuakaplan;
 
 import com.joshuakaplan.objects.Player;
-import com.joshuakaplan.utility.CheckerMover;
 import com.joshuakaplan.objects.Board;
 import com.joshuakaplan.utility.Boards;
 import com.joshuakaplan.utility.MoveCheck;
@@ -15,7 +14,6 @@ public class Main {
         Player player1 = new Player("Josh", Color.BLACK);
         Player player2 = new Player("AI", Color.RED);
         MoveCheck moveCheck = new MoveCheck(board);
-        CheckerMover checkerMover = new CheckerMover(board);
 
         Scanner scanner = new Scanner(System.in);
         board.print();
@@ -28,7 +26,6 @@ public class Main {
             String to = scanner.nextLine();
 
             if (moveCheck.check(currentPlayer, from, to)) {
-                checkerMover.move(from, to);
                 currentPlayer = currentPlayer == player1 ? player2 : player1;
                 board.print();
             } else {
