@@ -34,13 +34,6 @@ public class Main {
             } else {
                 System.out.println("Invalid move");
             }
-
-
         }
-    }
-
-    private static void testMove(String from, String to, Board board, MoveCheck moveCheck, Player player) {
-        boolean result = moveCheck.check(player, from, to);
-        System.out.println(result);
     }
 }
