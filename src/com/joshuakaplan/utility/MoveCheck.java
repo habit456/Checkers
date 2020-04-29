@@ -28,16 +28,12 @@ public class MoveCheck {
     }
 
     private void setFields(Player player, String from, String to) {
-        Square squareFrom = Boards.getSquare(board, from);
-        Square squareTo = Boards.getSquare(board, to);
-        Move moveType = getMoveType();
-
         this.player = player;
         this.from = from;
         this.to = to;
-        this.squareFrom = squareFrom;
-        this.squareTo = squareTo;
-        this.moveType = moveType;
+        this.squareFrom = Boards.getSquare(board, from);
+        this.squareTo = Boards.getSquare(board, to);
+        this.moveType = getMoveType();
     }
 
     public boolean check(Player player, String from, String to) {
@@ -91,11 +87,49 @@ public class MoveCheck {
             return checkSingleMove();
         }
 
-//        if (moveType == Move.DOUBLE) {
-//            checkDoubleMove();
-//        }
+        if (moveType == Move.DOUBLE) {
+            return checkDoubleMove();
+        }
 
         return false;
+    }
+
+    private boolean checkDoubleMove() {
+        int[] difference = Positions.calculateDifference(from, to, false);
+
+        // checks if correct direction for not kinged piece
+        if (!squareFrom.getChecker().isKing()) {
+            if (!isCorrectDirection(difference)) {
+                return false;
+            }
+        }
+
+        return isJumpingOverEnemy(difference);
+    }
+
+    private boolean isJumpingOverEnemy(int[] difference) {
+        Square middleSquare = getMiddleSquare(difference);
+
+        if (middleSquare.isEmpty()) {
+            return false;
+        }
+
+        if (middleSquare.getChecker().getColor() == player.getColor()) {
+            return false;
+        }
+
+        return true;
+    }
+
+    private Square getMiddleSquare(int[] difference) {
+        difference[0] = difference[0] * -1;
+        difference[1] = difference[1] * -1;
+
+        int[] halfDifference = new int[] {difference[0] / 2, difference[1] / 2};
+        int[] fromArr = Positions.toArray(from);
+        int[] middlePositionArray = Positions.calculateSum(halfDifference, fromArr);
+        String middlePosition = Positions.toPosition(middlePositionArray);
+        return Boards.getSquare(board, middlePosition);
     }
 
     private boolean checkSingleMove() {

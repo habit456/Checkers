@@ -2,6 +2,8 @@ package com.joshuakaplan.utility;
 
 import com.joshuakaplan.objects.Position;
 
+import java.util.Arrays;
+
 /**
  * Helper methods for translating and validating positions
  */
@@ -130,6 +132,10 @@ public class Positions {
         return intToColumn(column) + row;
     }
 
+    public static String toPosition(int[] position) {
+        return toPosition(position[0], position[1]);
+    }
+
     public static int[] toArray(String position) {
         return new int[] {columnToInt(position.substring(0, 1)), Integer.parseInt(position.substring(1, 2))};
     }
@@ -138,9 +144,13 @@ public class Positions {
         int[] fromArr = toArray(from);
         int[] toArr = toArray(to);
 
+        return calculateDifference(fromArr, toArr, isAbsolute);
+    }
+
+    public static int[] calculateDifference(int[] arr1, int[] arr2, boolean isAbsolute) {
         int[] difference = new int[2];
-        difference[0] = fromArr[0] - toArr[0];
-        difference[1] = fromArr[1] - toArr[1];
+        difference[0] = arr1[0] - arr2[0];
+        difference[1] = arr1[1] - arr2[1];
 
         if (isAbsolute) {
             difference[0] = Math.abs(difference[0]);
@@ -148,5 +158,12 @@ public class Positions {
         }
 
         return difference;
+    }
+
+    public static int[] calculateSum(int[] arr1, int[] arr2) {
+        int[] result = new int[2];
+        result[0] = arr1[0] + arr2[0];
+        result[1] = arr1[1] + arr2[1];
+        return result;
     }
 }
