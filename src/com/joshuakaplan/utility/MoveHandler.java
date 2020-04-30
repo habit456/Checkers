@@ -1,6 +1,8 @@
 package com.joshuakaplan.utility;
 
+import com.joshuakaplan.Color;
 import com.joshuakaplan.Move;
+import com.joshuakaplan.functional.Game;
 import com.joshuakaplan.objects.Board;
 import com.joshuakaplan.objects.Checker;
 import com.joshuakaplan.objects.Player;
@@ -9,9 +11,10 @@ import com.joshuakaplan.objects.Square;
 public class MoveHandler {
     private MoveCheck moveCheck;
     private Board board;
-    private Checker lastCheckerCaptured;
+    private Game game;
 
-    public MoveHandler(Board board) {
+    public MoveHandler(Board board, Game game) {
+        this.game = game;
         this.board = board;
         this.moveCheck = new MoveCheck(board);
     }
@@ -53,7 +56,17 @@ public class MoveHandler {
 
     private boolean handleDoubleMove(String from, String to) {
         Square middleSquare = Positions.getMiddleSquare(from, to, board.getBoard());
-        lastCheckerCaptured = middleSquare.getChecker();
+
+        Checker captured = middleSquare.getChecker();
+
+        if (captured.getColor() == Color.RED) {
+            game.setRedPiecesCaptured(game.getRedPiecesCaptured() + 1);
+        } else if (captured.getColor() == Color.BLACK) {
+            game.setBlackPiecesCaptured(game.getBlackPiecesCaptured() + 1);
+        } else {
+            return false;
+        }
+
         middleSquare.setChecker(null);
         return move(from, to);
     }
@@ -73,10 +86,11 @@ public class MoveHandler {
         Checker checker = from.getChecker();
         from.setChecker(null);
         to.setChecker(checker);
-        return true;
-    }
 
-    public Checker getLastCheckerCaptured() {
-        return lastCheckerCaptured;
+        if (Positions.isLastRow(to)) {
+            checker.king();
+        }
+
+        return true;
     }
 }

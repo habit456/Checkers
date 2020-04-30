@@ -1,5 +1,7 @@
 package com.joshuakaplan.utility;
 
+import com.joshuakaplan.Color;
+import com.joshuakaplan.objects.Player;
 import com.joshuakaplan.objects.Position;
 import com.joshuakaplan.objects.Square;
 
@@ -69,6 +71,22 @@ public class Positions {
 
     public static boolean isLastColumn(Position position) {
         return position.getPosition().contains("H");
+    }
+
+    public static boolean isLastRow(Square square) {
+        Color playerColor = square.getChecker().getColor();
+        String position = square.getPosition().getPosition();
+        int row = toArray(position)[1];
+
+        if (playerColor == Color.BLACK) {
+            return row == 8;
+        }
+
+        if (playerColor == Color.RED) {
+            return row == 1;
+        }
+
+        return false;
     }
 
     /**
