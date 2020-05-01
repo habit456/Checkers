@@ -64,6 +64,7 @@ public class BoardInitializer {
         setRedCheckers(squares);
     }
 
+    // TODO: refactor
     private static void setBlackCheckers(List<Square> squares) {
         for (int i = 1; i <= 3; i++) {
             for (int j = 1; j <= 8; j++) {
@@ -78,6 +79,7 @@ public class BoardInitializer {
         }
     }
 
+    // TODO: refactor
     private static void setRedCheckers(List<Square> squares) {
         for (int i = 6; i <= 8; i++) {
             for (int j = 1; j <= 8; j++) {

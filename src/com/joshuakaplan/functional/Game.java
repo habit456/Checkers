@@ -3,7 +3,10 @@ package com.joshuakaplan.functional;
 import com.joshuakaplan.objects.Board;
 import com.joshuakaplan.objects.Player;
 import com.joshuakaplan.utility.Boards;
+import com.joshuakaplan.utility.JumpDetector;
 import com.joshuakaplan.utility.MoveHandler;
+
+import java.util.Arrays;
 
 /**
  * Contains all of the methods for game behavior such as moving, capturing, checking for wins, etc.
@@ -17,12 +20,14 @@ public class Game {
     private Player player1;
     private Player player2;
     private MoveHandler moveHandler;
+    private JumpDetector detector;
 
     public Game(Player player1, Player player2) {
         this.board = Boards.initialize();
         this.player1 = player1;
         this.player2 = player2;
         this.moveHandler = new MoveHandler(board, this);
+        this.detector = new JumpDetector(board);
     }
 
     public boolean tryMove(String from, String to, Player player) {

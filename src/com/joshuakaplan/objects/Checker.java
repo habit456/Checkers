@@ -30,10 +30,24 @@ public class Checker {
 
     @Override
     public String toString() {
+        String display;
+
         if (color == Color.RED) {
-            return ConsoleColors.RED_BOLD + "R" + ConsoleColors.RESET;
+            if (isKing) {
+                display = "K";
+            } else {
+                display = "R";
+            }
+
+            return ConsoleColors.RED_BOLD + display + ConsoleColors.RESET;
         } else {
-            return ConsoleColors.CYAN_BOLD + "B" + ConsoleColors.RESET;
+            if (isKing) {
+                display = "K";
+            } else {
+                display = "B";
+            }
+
+            return ConsoleColors.CYAN_BOLD + display + ConsoleColors.RESET;
         }
     }
 }

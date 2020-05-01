@@ -17,6 +17,7 @@ public class BoardPrinter {
 
     // references
     private List<Square> board;
+    private List<String> rows;
 
     public BoardPrinter(Board board) {
         this(board.getRowCount(), board.getColumnCount(), 6,
@@ -40,20 +41,18 @@ public class BoardPrinter {
 
     @Override
     public String toString() {
-        List<String> rows = new ArrayList<>();
+        rows = new ArrayList<>();
 
         for (int row = 1; row <= rowCount; row++) {
-            constructRow(rows, row);
+            constructRow(row);
         }
 
-        addExtras(rows);
+        addExtras();
 
-        String board = constructBoard(rows);
-
-        return board;
+        return constructBoard();
     }
 
-    private void constructRow(List<String> rows, int row) {
+    private void constructRow(int row) {
         for (int line = 1; line <= squareHeight; line++) {
             rows.add(constructLine(row, line));
         }
@@ -106,14 +105,14 @@ public class BoardPrinter {
         return (length / 2) + 1;
     }
 
-    private void addExtras(List<String> rows) {
-        addLastRow(rows);
-        addLastColumn(rows);
-        addColumnLetters(rows);
-        addRowNumbers(rows);
+    private void addExtras() {
+        addLastRow();
+        addLastColumn();
+        addColumnLetters();
+        addRowNumbers();
     }
 
-    private void addLastRow(List<String> rows) {
+    private void addLastRow() {
         int length = rows.get(0).length();
         StringBuilder sb = new StringBuilder();
 
@@ -124,7 +123,7 @@ public class BoardPrinter {
         rows.add(sb.toString());
     }
 
-    private void addLastColumn(List<String> rows) {
+    private void addLastColumn() {
         for (int i = 0; i < rows.size(); i++) {
             String line = rows.get(i);
             line += "#\n";
@@ -132,8 +131,8 @@ public class BoardPrinter {
         }
     }
 
-    private void addColumnLetters(List<String> rows) {
-        addBlankLines(rows);
+    private void addColumnLetters() {
+        addBlankLines();
 
         int length = rows.get(0).length();
         StringBuilder sb = new StringBuilder();
@@ -145,9 +144,9 @@ public class BoardPrinter {
         rows.add(0, sb.toString());
     }
 
-    private void addBlankLines(List<String> rows) {
+    private void addBlankLines() {
         for (int numLines = 0; numLines < bottomBorderSpacing; numLines++) {
-            addBlankLine(rows);
+            addBlankLine();
         }
     }
 
@@ -165,7 +164,7 @@ public class BoardPrinter {
         return sb.toString();
     }
 
-    private void addBlankLine(List<String> rows) {
+    private void addBlankLine() {
         StringBuilder sb = new StringBuilder();
 
         for (int i = 0; i < rows.get(0).length(); i++) {
@@ -176,18 +175,18 @@ public class BoardPrinter {
         rows.add(0, sb.toString());
     }
 
-    private void addRowNumbers(List<String> rows) {
+    private void addRowNumbers() {
         String spaces = getSpacing();
         int lastIndex = rows.size() - 1;
 
-        formatExtraLines(rows, spaces); // formats extra bottom lines
-        formatRows(rows, spaces);
+        formatExtraLines(spaces); // formats extra bottom lines
+        formatRows(spaces);
         rows.set(lastIndex, spaces + rows.get(lastIndex)); // formats extra top line
     }
 
-    private void formatRows(List<String> rows, String spaces) {
+    private void formatRows(String spaces) {
         for (int row = 1; row <= rowCount; row++) {
-            rowNumbersSection(rows, row, spaces);
+            rowNumbersSection(row, spaces);
         }
     }
 
@@ -201,20 +200,20 @@ public class BoardPrinter {
         return sb.toString();
     }
 
-    private void formatExtraLines(List<String> rows, String spaces) {
+    private void formatExtraLines(String spaces) {
         for (int line = 0; line < bottomBorderSpacing + 1; line++) {
             String currentLine = rows.get(line);
             rows.set(line, spaces + currentLine);
         }
     }
 
-    private void rowNumbersSection(List<String> rows, int row, String spaces) {
+    private void rowNumbersSection(int row, String spaces) {
         for (int line = 1; line <= squareHeight; line++) {
-            formatRowLine(rows, row, spaces, line);
+            formatRowLine(row, spaces, line);
         }
     }
 
-    private void formatRowLine(List<String> rows, int row, String spaces, int line) {
+    private void formatRowLine(int row, String spaces, int line) {
         int halfPoint = getHalfPoint(squareHeight);
         String add;
 
@@ -230,7 +229,7 @@ public class BoardPrinter {
         rows.set(index, add + rows.get(index));
     }
 
-    private String constructBoard(List<String> rows) {
+    private String constructBoard() {
         StringBuilder sb = new StringBuilder();
 
         for (int i = rows.size() - 1; i >= 0; i--) {

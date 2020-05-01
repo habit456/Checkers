@@ -187,6 +187,17 @@ public class Positions {
         return result;
     }
 
+    public static int[] calculateSum(String pos1, int[] pos2) {
+        int[] pos1Arr = toArray(pos1);
+        return calculateSum(pos1Arr, pos2);
+    }
+
+    public static int[] calculateSum(String pos1, String pos2) {
+        int[] pos1Arr = toArray(pos1);
+        int[] pos2Arr = toArray(pos2);
+        return calculateSum(pos1Arr, pos2Arr);
+    }
+
     public static Square getMiddleSquare(String from, String to, List<Square> board) {
         int[] difference = Positions.calculateDifference(from, to, false);
         return getMiddleSquare(difference, from, board);
