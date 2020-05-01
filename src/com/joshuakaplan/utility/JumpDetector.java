@@ -25,7 +25,7 @@ public class JumpDetector {
 
     public JumpDetector(List<Square> board) {
         this.board = board;
-        this.moveCheck = new MoveCheck(board);
+        this.moveCheck = new MoveCheck(board, false);
     }
 
     public String[] detectAllJumpsForPlayer(Player player) {

@@ -6,11 +6,11 @@ import com.joshuakaplan.objects.Board;
 import com.joshuakaplan.objects.Player;
 import com.joshuakaplan.objects.Square;
 
-import java.util.ArrayList;
 import java.util.List;
 
 public class MoveCheck {
     private List<Square> board;
+    private JumpDetector detector;
 
     private Player player;
     private String from;
@@ -18,13 +18,15 @@ public class MoveCheck {
     private Square squareFrom;
     private Square squareTo;
     private Move moveType;
+    private boolean checkMands;
 
-    public MoveCheck(List<Square> board) {
+    public MoveCheck(List<Square> board, boolean checkMands) {
         this.board = board;
+        this.checkMands = checkMands;
     }
 
-    public MoveCheck(Board board) {
-        this(board.getBoard());
+    public MoveCheck(Board board, boolean checkMands) {
+        this(board.getBoard(), checkMands);
     }
 
     private void setFields(Player player, String from, String to) {
@@ -34,6 +36,7 @@ public class MoveCheck {
         this.squareFrom = Boards.getSquare(board, from);
         this.squareTo = Boards.getSquare(board, to);
         this.moveType = getMoveType();
+        this.detector = new JumpDetector(board);
     }
 
     public boolean check(Player player, String from, String to) {
@@ -46,6 +49,28 @@ public class MoveCheck {
         }
 
         setFields(player, from, to);
+
+        if (checkMands) {
+            return checkMandatoryMoves();
+        } else {
+            return checkSquares();
+        }
+    }
+
+    private boolean checkMandatoryMoves() {
+        String[] mandatoryMoves = detector.detectAllJumpsForPlayer(player);
+
+        if (mandatoryMoves.length > 0) {
+            for (String move: mandatoryMoves) {
+                String[] fromTo = move.split(" ");
+
+                if (from.equals(fromTo[0]) && to.equals(fromTo[1])) {
+                    return true;
+                }
+            }
+
+            return false;
+        }
 
         return checkSquares();
     }

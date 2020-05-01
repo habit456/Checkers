@@ -6,8 +6,6 @@ import com.joshuakaplan.utility.Boards;
 import com.joshuakaplan.utility.JumpDetector;
 import com.joshuakaplan.utility.MoveHandler;
 
-import java.util.Arrays;
-
 /**
  * Contains all of the methods for game behavior such as moving, capturing, checking for wins, etc.
  * This class is the game.
@@ -21,6 +19,9 @@ public class Game {
     private Player player2;
     private MoveHandler moveHandler;
     private JumpDetector detector;
+    private boolean playerJumped = false;
+    private String lastFrom;
+    private String lastTo;
 
     public Game(Player player1, Player player2) {
         this.board = Boards.initialize();
@@ -98,5 +99,33 @@ public class Game {
 
     public void setBoard(Board board) {
         this.board = board;
+    }
+
+    public boolean getPlayerJumped() {
+        return playerJumped;
+    }
+
+    public void setPlayerJumped(boolean playerJumped) {
+        this.playerJumped = playerJumped;
+    }
+
+    public JumpDetector getDetector() {
+        return detector;
+    }
+
+    public String getLastFrom() {
+        return lastFrom;
+    }
+
+    public void setLastFrom(String lastFrom) {
+        this.lastFrom = lastFrom;
+    }
+
+    public String getLastTo() {
+        return lastTo;
+    }
+
+    public void setLastTo(String lastTo) {
+        this.lastTo = lastTo;
     }
 }

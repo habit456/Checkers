@@ -1,11 +1,9 @@
 package com.joshuakaplan.utility;
 
 import com.joshuakaplan.Color;
-import com.joshuakaplan.objects.Player;
 import com.joshuakaplan.objects.Position;
 import com.joshuakaplan.objects.Square;
 
-import java.util.Arrays;
 import java.util.List;
 
 /**

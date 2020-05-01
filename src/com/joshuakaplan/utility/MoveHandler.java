@@ -16,7 +16,7 @@ public class MoveHandler {
     public MoveHandler(Board board, Game game) {
         this.game = game;
         this.board = board;
-        this.moveCheck = new MoveCheck(board);
+        this.moveCheck = new MoveCheck(board, true);
     }
 
     /**
@@ -66,6 +66,8 @@ public class MoveHandler {
         } else {
             return false;
         }
+
+        game.setPlayerJumped(true);
 
         middleSquare.setChecker(null);
         return move(from, to);

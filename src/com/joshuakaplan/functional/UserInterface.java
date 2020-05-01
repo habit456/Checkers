@@ -58,6 +58,8 @@ public class UserInterface {
             String to = getInput("To: ");
 
             if (game.tryMove(from, to, currentPlayer)) {
+                game.setLastFrom(from);
+                game.setLastTo(to);
                 break;
             } else {
                 System.out.println("Invalid move. Try again.");
@@ -74,7 +76,16 @@ public class UserInterface {
         while (!game.isGameOver()) {
             game.getBoard().print();
             getPlayerMove();
-            changePlayer();
+
+            if (game.getPlayerJumped()) {
+                game.setPlayerJumped(false);
+                String[] moves = game.getDetector().detect(game.getLastTo(), currentPlayer);
+                if (moves.length == 0) {
+                    changePlayer();
+                }
+            } else {
+                changePlayer();
+            }
         }
     }
 
